@@ -20,7 +20,7 @@ jobs:
       - name: Set up ZIP structure
         run: |
           mkdir -p build
-          cp -r * build/
+          rsync -av --exclude 'build' ./ build/
           cd build
           zip -r ../photon.zip .
 
