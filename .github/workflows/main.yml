@@ -6,6 +6,8 @@ on:
       - voxy-support
   pull_request:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -27,6 +29,3 @@ jobs:
         with:
           name: photon-shader
           path: photon.zip
-on:
-  release:
-    types: [published]
