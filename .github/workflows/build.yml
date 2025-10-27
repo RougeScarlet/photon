@@ -1,0 +1,31 @@
+name: Build Shader ZIP
+
+on:
+  push:
+    branches:
+      - voxy-support
+  pull_request:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up ZIP structure
+        run: |
+          mkdir -p build
+          rsync -av --exclude 'build' ./ build/
+          cd build
+          zip -r ../photon.zip .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: photon-shader
+          path: photon.zip
